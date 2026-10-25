@@ -22,7 +22,7 @@ models ([MatAnyone2](https://github.com/pq-yang/MatAnyone2), [VideoMaMa](https:/
 | SAM 2.1 tiny / base+ / large | **Experimental** (same code path as small, not run) |
 | ViTMatte soft-alpha refinement | **Tested** (real footage) |
 | MatAnyone2 refinement (non-commercial) | **Tested** (real footage, separate environment) |
-| VideoMaMa refinement (non-commercial) | **Experimental** (see [Test results](#test-results)) |
+| VideoMaMa refinement (non-commercial) | **Tested on one 16-frame chunk**; longer clips experimental |
 | SAM 3 text prompts | **Experimental, untested**: weights are gated; code checked against the `transformers` 5.20 API only |
 | Nuke node | **Untested in Nuke.** It compiles under Nuke 15.1's Python, which is *not* an integration test. See [docs/NUKE_TESTING.md](docs/NUKE_TESTING.md) |
 
@@ -54,7 +54,7 @@ You are responsible for following each model's license.
 ## Install
 
 ```bash
-git clone https://github.com/hamdyelshiwy93/openmatte.git
+git clone https://github.com/hamdyelshiwy/openmatte.git
 cd openmatte
 python -m venv .venv
 # Windows: .venv\Scripts\activate      Linux: source .venv/bin/activate
@@ -156,7 +156,7 @@ Timings include model loading; first runs also include downloads.
 | SAM 2.1 small, real footage | same, 3 clicks | **Pass** (visual check). Whole subject tracked through a full occlusion; 13 s |
 | + ViTMatte | same, 200 frames | **Pass.** 256 alpha levels, soft motion-blur edges; 35 s total (~9 fps refine) |
 | + MatAnyone2 | first 48 frames | **Pass** (visual check), with a faint ghost of an occluding person on one frame; 49 s incl. downloads |
-| + VideoMaMa | first 16 frames | **Not yet verified**: the first run was still downloading its 6.1 GB of weights at release time |
+| + VideoMaMa | first 16 frames (one chunk) | **Pass** (visual check). 256 alpha levels; 794 s on the first run, mostly the ~7.5 GB weight download. Multi-chunk clips untested |
 | SAM 3, `--text boy` | real footage | **Not run**: gated weights (clear error message verified) |
 | Nuke node in Nuke 15.1 | — | **Not run**: no Nuke license available for terminal mode; compiles under Nuke's Python 3.10.10 |
 
