@@ -54,7 +54,7 @@ You are responsible for following each model's license.
 ## Install
 
 ```bash
-git clone https://github.com/<you>/openmatte.git
+git clone https://github.com/hamdyelshiwy93/openmatte.git
 cd openmatte
 python -m venv .venv
 # Windows: .venv\Scripts\activate      Linux: source .venv/bin/activate
