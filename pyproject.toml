@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=77"]  # SPDX license expression
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "openmatte"
+version = "0.1.0"
+description = "Open-source click-to-matte for images and video (SAM 2, optional MatAnyone2) with a Nuke node"
+readme = "README.md"
+license = "Apache-2.0"
+requires-python = ">=3.10"
+dependencies = [
+    "torch>=2.5.1",
+    "torchvision>=0.20.1",
+    "SAM-2 @ git+https://github.com/facebookresearch/sam2.git@2b90b9f5ceec907a1c18123530e92e794ad901a4",
+    "huggingface_hub>=0.23",
+    "transformers>=4.57",  # SAM 3 and ViTMatte
+    "accelerate",
+    "pillow",
+    "opencv-python-headless>=4.8",
+    "numpy",
+]
+
+[project.optional-dependencies]
+# VideoMaMa (NON-COMMERCIAL licenses) runs from its own clone; these are the extra packages its inference needs.
+# MatAnyone2 (NON-COMMERCIAL) runs in its own environment, see README.
+videomama = ["diffusers>=0.31", "einops"]
+
+[project.scripts]
+openmatte = "openmatte.cli:main"
+
+[tool.setuptools]
+packages = ["openmatte"]

@@ -1,0 +1,16 @@
+.venv/
+__pycache__/
+*.pyc
+*.egg-info/
+build/
+dist/
+*.log
+examples/ball/
+examples/out/
+*.pt
+*.pth
+.DS_Store
+testdata/
+examples/out_nuke/
+third_party/
+_private/
