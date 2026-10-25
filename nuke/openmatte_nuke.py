@@ -3,6 +3,7 @@
 The engine runs out-of-process so torch never loads inside Nuke's interpreter.
 """
 import os
+import shutil
 import subprocess
 import tempfile
 import uuid
@@ -76,7 +77,10 @@ def generate(g):
     cache = g["cache"].value() or os.path.join(tempfile.gettempdir(), "openmatte", uuid.uuid4().hex[:8])
     g["cache"].setValue(cache)
     in_dir, out_dir = os.path.join(cache, "in"), os.path.join(cache, f"alpha_{uuid.uuid4().hex[:6]}")
-    os.makedirs(in_dir, exist_ok=True)
+    # start from an empty folder: the engine reads every image in it, so frames left over from a
+    # previous, longer frame range would shift the frame count and the click frame
+    shutil.rmtree(in_dir, ignore_errors=True)
+    os.makedirs(in_dir)
 
     # 1. render the input frames
     with g:
